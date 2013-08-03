@@ -16,11 +16,12 @@ OpenSpending.sankey= function(config) {
   var getNodeList=function(t,r) {
     c=getChildren(t);
     if (_.uniq(c).length==0) {
-      return r}
+      return _.uniq(r)}
     else {
-    nodes=_.uniq(getNodes(c));
-    r=r.concat(nodes);
-      return getNodeList(c,r);}
+    nodes=getNodes(c);
+    r=_.uniq(r.concat(nodes),function(d) {
+       return d.label+"$"+d.level;});
+    return getNodeList(c,r);}
     }
   var makeNodeObject=function(l){
     return {nodes: _.map(l,function(d) { return {name: d.label} }),
@@ -49,7 +50,8 @@ OpenSpending.sankey= function(config) {
      nl=getNodeList([tree],[]);
      no=makeNodeObject(nl);
      makeLinkList([tree],no);
-
+     console.log(nl);
+     console.log(no);
      var margin= {top: 1, right: 1, bottom: 6, left: 1}
      el=document.getElementById("chart")
       var width= el.offsetWidth - margin.left -margin.right;
