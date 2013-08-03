@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body {
+  font-family: open-sans, sans;
+  }
+
+.container {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+#chart {
+  padding: 10px;
+  width: 900;
+  height: 900;
+  }
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover, .selected {
+  stroke-opacity: .5;
+}
+</style>
+<title>where does the UNDP spend their money</title>
+</head>
+<body>
+<div class="container">
+
+<div id="chart">
+</div>
+<script src="js/vendor/d3.v3.min.js"></script>
+<script src="js/vendor/sankey.js"></script>
+<script src="js/vendor/underscore-min.js"></script>
+<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/openspending/aggregator.js"></script>
+<script src="js/os-sankey.js"></script>
+<script>
+
+var config={
+    siteUrl: 'http://openspending.org',
+    dataset: 'de-bund',
+    drilldowns: ['hauptfunktion','oberfunktion'],
+    cuts: ['year:2010'],
+    rootNodeLabel: 'Total',
+    measure: 'amount',
+    processEntry: function(e) { return e; },
+    callback: function (tree) {data=tree}
+  };
+
+OpenSpending.sankey(config);
+</script>
+</body>
+</html>
