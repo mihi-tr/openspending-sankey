@@ -55,7 +55,7 @@ OpenSpending.sankey= function(config) {
      var margin= {top: 1, right: 1, bottom: 6, left: 1}
      el=document.getElementById("chart")
       var width= el.offsetWidth - margin.left -margin.right;
-      var height = el.offsetWidth - margin.top -margin.bottom;
+      var height = el.offsetHeight - margin.top -margin.bottom;
 
       var formatNumber= d3.format(",.0f"),
         format=function(d) { return formatNumber(d) + " " + tree.currency },
